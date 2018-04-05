@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var counter = 0
     var myTimer = Timer()
     var direction = "right"
+    var isPlay = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +28,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func play(_ sender: Any) {
-        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
-    }
-    
-    @IBAction func stop(_ sender: Any) {
-        myTimer.invalidate()
+    @IBAction func btplay(_ sender: Any) {
+        if isPlay == false {
+            myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
+            isPlay = true
+        }else {
+            myTimer.invalidate()
+            isPlay = false
+        }
         
     }
+    
     @objc func doAnimation(){
         if direction=="right" {
             if counter==4 {
